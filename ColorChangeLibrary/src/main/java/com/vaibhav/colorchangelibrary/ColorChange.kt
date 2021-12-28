@@ -1,0 +1,30 @@
+package com.vaibhav.colorchangelibrary
+
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
+import android.graphics.Color
+import android.os.Build
+import android.view.View
+import android.view.animation.Animation
+
+object ColorChange {
+
+    fun change(view: View) {
+        
+        // duration of one color
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            val animator: ObjectAnimator = ObjectAnimator.ofInt(
+                view, "backgroundColor", Color.YELLOW,
+                Color.RED, Color.GREEN
+            )
+            animator.duration = 500
+            animator.setEvaluator(ArgbEvaluator())
+            // color will be shown in reverse manner
+            animator.repeatCount = Animation.REVERSE
+            // Repeat up to infinite time
+            animator.repeatCount = Animation.INFINITE
+            animator.start()
+        }
+
+    }
+}
